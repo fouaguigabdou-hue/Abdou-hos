@@ -1,0 +1,12 @@
+flask
+gunicorn
+aiohttp
+pycryptodome
+protobuf
+requests
+psutil
+pytz
+pyjwt
+cfonts
+protobuf-decoder
+google-protobuf

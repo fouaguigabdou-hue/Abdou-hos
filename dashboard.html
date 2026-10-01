@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>ABDOUUU VIP TEAM</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <h1>🔥 𝗔𝗕𝗗𝗢𝗨𝗨𝗨 𝗩𝗜𝗣 𝗧𝗘𝗔𝗠</h1>
+    <button class="btn-danger" onclick="logout()">🚪 خروج</button>
+</header>
+
+<div class="grid">
+
+    <!-- ============ 1) معلومات اللاعب ============ -->
+    <div class="card">
+        <h2>📊 معلومات لاعب</h2>
+        <input id="infoUid" placeholder="UID اللاعب">
+        <div class="btn-row">
+            <button onclick="getInfo()">🔍 جلب المعلومات</button>
+            <button onclick="checkBan()">🚫 فحص الحظر</button>
+        </div>
+        <div id="infoResult" class="result-box"></div>
+    </div>
+
+    <!-- ============ 2) الحسابات الفرعية ============ -->
+    <div class="card">
+        <h2>👥 الحسابات الفرعية</h2>
+        <input id="uid"  placeholder="UID">
+        <input id="pass" placeholder="Password">
+        <input id="name" placeholder="اسم (اختياري)">
+        <div class="btn-row">
+            <button onclick="addSub()">➕ إضافة</button>
+            <button onclick="startAll()">▶ تشغيل الكل</button>
+            <button class="btn-danger" onclick="stopAll()">⏹ إيقاف الكل</button>
+        </div>
+        <div id="subs" class="scroll-list">جارٍ التحميل...</div>
+    </div>
+
+    <!-- ============ 3) سبام انضمام (SPM) ============ -->
+    <div class="card">
+        <h2>🚪 سبام انضمام للفريق</h2>
+        <input id="spmUid" placeholder="UID الهدف">
+        <div class="btn-row">
+            <button onclick="spamJoin()">💥 بدء</button>
+            <button class="btn-danger" onclick="stopJoin()">⏹ إيقاف</button>
+        </div>
+        <p class="hint">يرسل دعوات انضمام لا نهائية</p>
+    </div>
+
+    <!-- ============ 4) سبام Lag ============ -->
+    <div class="card">
+        <h2>⚡ سبام Lag</h2>
+        <input id="lagTeam" placeholder="Team Code">
+        <input id="lagCount" type="number" value="30" placeholder="عدد الحزم">
+        <input id="lagDelay" type="number" step="0.1" value="0.25" placeholder="التأخير">
+        <div class="btn-row">
+            <button onclick="spamLag()">🔥 بدء Lag</button>
+            <button class="btn-danger" onclick="stopLag()">⏹ إيقاف</button>
+        </div>
+    </div>
+
+    <!-- ============ 5) سبام رسائل ============ -->
+    <div class="card">
+        <h2>💬 سبام رسائل</h2>
+        <input id="msgTeam" placeholder="Team Code">
+        <input id="msgText" placeholder="الرسالة">
+        <input id="msgCount" type="number" value="30" placeholder="عدد الرسائل">
+        <div class="btn-row">
+            <button onclick="spamMsg()">📨 بدء</button>
+            <button class="btn-danger" onclick="stopMsg()">⏹ إيقاف</button>
+        </div>
+    </div>
+
+    <!-- ============ 6) سبام الفريق المتعدد ============ -->
+    <div class="card">
+        <h2>🚀 سبام الفريق (كل الحسابات)</h2>
+        <input id="multiTeam" placeholder="Team Code">
+        <input id="multiCount" type="number" value="30" placeholder="حزم/حساب">
+        <div class="btn-row">
+            <button onclick="spamMulti()">💣 بدء الجماعي</button>
+            <button class="btn-danger" onclick="stopMulti()">⏹ إيقاف</button>
+        </div>
+    </div>
+
+    <!-- ============ 7) أشباح ============ -->
+    <div class="card">
+        <h2>👻 أشباح</h2>
+        <input id="ghTeam" placeholder="Team Code">
+        <input id="ghName" placeholder="اسم الشبح">
+        <button onclick="sendGhost()">👻 إرسال 4 أشباح</button>
+    </div>
+
+    <!-- ============ 8) حظر ============ -->
+    <div class="card">
+        <h2>🔨 حظر لاعب</h2>
+        <input id="banUid" placeholder="UID الهدف">
+        <div class="btn-row">
+            <button onclick="banStart()">🔨 بدء الحظر</button>
+            <button class="btn-danger" onclick="banStop()">⏹ إيقاف</button>
+        </div>
+    </div>
+
+    <!-- ============ 9) إنشاء فريق ============ -->
+    <div class="card">
+        <h2>👥 إنشاء فريق</h2>
+        <input id="csUid" placeholder="UID اللاعب">
+        <div class="btn-row">
+            <button onclick="createSquad(5)">فريق 5</button>
+            <button onclick="createSquad(6)">فريق 6</button>
+        </div>
+    </div>
+
+    <!-- ============ 10) إيموتات Evo ============ -->
+    <div class="card">
+        <h2>🎭 Evo Cycle</h2>
+        <input id="evoUids" placeholder="UIDs مفصولة بفاصلة">
+        <div class="btn-row">
+            <button onclick="evoStart()">▶ بدء</button>
+            <button class="btn-danger" onclick="evoStop()">⏹ إيقاف</button>
+        </div>
+    </div>
+
+    <!-- ============ 11) زر الإيقاف الشامل ============ -->
+    <div class="card wide">
+        <button class="btn-danger btn-big" onclick="stopAllSpam()">
+            🛑 إيقاف كل السبامات
+        </button>
+    </div>
+
+    <!-- ============ 12) السجل ============ -->
+    <div class="card wide">
+        <h2>📋 السجل</h2>
+        <div id="log" class="log-box"></div>
+    </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const log = (m, c='') => {
+    const el = $('log');
+    const color = c ? `style="color:${c}"` : '';
+    el.innerHTML += `<div ${color}>[${new Date().toLocaleTimeString()}] ${m}</div>`;
+    el.scrollTop = el.scrollHeight;
+};
+
+async function api(path, data={}) {
+    try {
+        const r = await fetch(path, {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(data)
+        });
+        return await r.json();
+    } catch(e) {
+        return { success:false, message:'خطأ في الاتصال' };
+    }
+}
+
+// ============ 1) معلومات ============
+async function getInfo() {
+    const uid = $('infoUid').value.trim();
+    if (!uid) return log('❌ أدخل UID', '#ff5577');
+    log(`🔍 جلب معلومات ${uid}...`, '#7dffb3');
+    const d = await api('/api/player/info', {uid});
+    if (!d.success) return log(`❌ ${d.message}`, '#ff5577');
+    const b = d.data.basicInfo || {};
+    const c = d.data.clanBasicInfo || {};
+    $('infoResult').innerHTML = `
+        <b>الاسم:</b> ${b.nickname || '—'}<br>
+        <b>UID:</b> ${b.accountId || uid}<br>
+        <b>المستوى:</b> ${b.level || '—'}<br>
+        <b>السيرفر:</b> ${b.region || '—'}<br>
+        <b>الإعجابات:</b> ${b.liked || 0}<br>
+        <b>الكلان:</b> ${c.clanName || 'لا يوجد'}
+    `;
+    log('✓ تم الجلب', '#00ff66');
+}
+
+async function checkBan() {
+    const uid = $('infoUid').value.trim();
+    if (!uid) return log('❌ أدخل UID', '#ff5577');
+    log(`🚫 فحص حظر ${uid}...`, '#7dffb3');
+    const d = await api('/api/player/check', {uid});
+    if (!d.success) return log(`❌ ${d.message}`, '#ff5577');
+    const s = d.data.is_banned ? '🔴 محظور' : '🟢 نظيف';
+    $('infoResult').innerHTML = `<b>الحالة:</b> ${s}<br>
+        <b>السبب:</b> ${d.data.reason || 'لا يوجد'}<br>
+        <b>النوع:</b> ${d.data.ban_type || '—'}`;
+    log(`✓ ${s}`, d.data.is_banned ? '#ff5577' : '#00ff66');
+}
+
+// ============ 2) الحسابات الفرعية ============
+async function addSub() {
+    const d = await api('/api/sub/add', {
+        uid: $('uid').value,
+        password: $('pass').value,
+        name: $('name').value
+    });
+    log(d.message, d.success ? '#00ff66' : '#ff5577');
+    loadSubs();
+}
+async function startAll() { log((await api('/api/sub/startall')).message); loadSubs(); }
+async function stopAll()  { log((await api('/api/sub/stopall')).message);  loadSubs(); }
+
+async function loadSubs() {
+    const r = await fetch('/api/sub/list');
+    const d = await r.json();
+    $('subs').innerHTML = (d.accounts || []).map(s =>
+        `<div class="user-row ${s.connected?'on':'off'}">
+            <b>${s.name}</b><span>${s.uid}</span>
+            <span>${s.connected ? '🟢' : '🔴'}</span>
+        </div>`
+    ).join('') || '<i>لا يوجد حسابات</i>';
+}
+
+// ============ 3) SPM ============
+async function spamJoin() {
+    const uid = $('spmUid').value.trim();
+    if (!uid) return log('❌ أدخل UID', '#ff5577');
+    const d = await api('/api/spam/join', {uid});
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function stopJoin() {
+    const uid = $('spmUid').value.trim();
+    log((await api('/api/spam/join/stop', {uid})).message);
+}
+
+// ============ 4) Lag ============
+async function spamLag() {
+    const d = await api('/api/spam/lag', {
+        teamcode: $('lagTeam').value.trim(),
+        count: +$('lagCount').value,
+        delay: +$('lagDelay').value
+    });
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function stopLag() {
+    log((await api('/api/spam/lag/stop',
+        {teamcode: $('lagTeam').value.trim()})).message);
+}
+
+// ============ 5) Msg ============
+async function spamMsg() {
+    const d = await api('/api/spam/msg', {
+        teamcode: $('msgTeam').value.trim(),
+        message: $('msgText').value,
+        count: +$('msgCount').value
+    });
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function stopMsg() {
+    log((await api('/api/spam/msg/stop',
+        {teamcode: $('msgTeam').value.trim()})).message);
+}
+
+// ============ 6) Multi ============
+async function spamMulti() {
+    const d = await api('/api/spam/multi', {
+        teamcode: $('multiTeam').value.trim(),
+        count: +$('multiCount').value
+    });
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function stopMulti() {
+    log((await api('/api/spam/multi/stop')).message);
+}
+
+// ============ 7) Ghost ============
+async function sendGhost() {
+    const d = await api('/api/spam/ghost', {
+        teamcode: $('ghTeam').value.trim(),
+        name: $('ghName').value
+    });
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+
+// ============ 8) Ban ============
+async function banStart() {
+    const d = await api('/api/spam/ban', {uid: $('banUid').value.trim()});
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function banStop() {
+    const d = await api('/api/spam/ban/stop', {uid: $('banUid').value.trim()});
+    log(d.message);
+}
+
+// ============ 9) Create Squad ============
+async function createSquad(size) {
+    const d = await api('/api/squad/create', {size, uid: $('csUid').value.trim()});
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+
+// ============ 10) Evo ============
+async function evoStart() {
+    const uids = $('evoUids').value.split(',').map(s => s.trim()).filter(Boolean);
+    const d = await api('/api/evo/start', {uids});
+    log(d.message, d.success === false ? '#ff5577' : '#00ff66');
+}
+async function evoStop() {
+    log((await api('/api/evo/stop')).message);
+}
+
+// ============ 11) Stop All ============
+async function stopAllSpam() {
+    log((await api('/api/spam/stopall')).message, '#ffcc00');
+}
+
+// ============ Logout ============
+async function logout() { await api('/logout'); location.reload(); }
+
+loadSubs();
+setInterval(loadSubs, 5000);
+</script>
+</body>
+</html>

@@ -2,11 +2,11 @@ flask
 gunicorn
 aiohttp
 pycryptodome
-protobuf
+protobuf==3.20.1
 requests
 psutil
 pytz
 pyjwt
 cfonts
 protobuf-decoder
-google-protobuf
+googleapis-common-protos==1.71.0
